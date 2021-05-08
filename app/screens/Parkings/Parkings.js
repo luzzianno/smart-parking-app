@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView, ActivityIndicator } from 'react-native';
 import { firebaseApp } from "../../utils/firebase";
 import * as firebase from 'firebase';
 import _ from "lodash";
@@ -9,40 +9,100 @@ const db = firebase.database(firebaseApp).ref("parking1");
 
 export default function Parkings() {
 
-    //const [totalParkings, setTotalParkings] = useState(0);
-    const [data, setData] = useState([]);
+    const [dataOccup, setDataOccup] = useState([]);
+    const [numSlot, setNumSlot] = useState(0);
 
-    useEffect(() => {
+    const getDataOccup = () => {
         const aux = [];
         db.once("value", function (snapshot) {
             //console.log(snapshot.val());
-            _.mapKeys(snapshot.val(), function (ocupacion, key){
-                aux.push(ocupacion)
+            _.mapKeys(snapshot.val(), function (ocupation, key) {
+                aux.push(ocupation)
             })
-            setData(aux);
+            setDataOccup(aux);
+            setNumSlot(aux.length);
         });
-    }, [])
+    };
 
-    console.log({ data });
-
-    const arreglo = [0, 1, 0, 1, 1];
-
+    useEffect(() => {
+        this.setInterval( () => { 
+            getDataOccup();
+         }, 2000);
+    }, []);
+    /* console.log({dataOccup});
+    console.log(numSlot); */
     return (
-        <View style={styles.view}>
-            {data.map((ocupacion,key) =>  ocupacion ? <View style={styles.border} ><Text key={key}>Ocupado</Text></View> : <View style={styles.border} ><Text key={key}>desocupado</Text></View>
-            )}
-        </View>
+        <ScrollView>
+            <View>
+                <Text style={styles.crosswalk}> Paso de cebra </Text>
+            </View>
+            <View style={styles.viewCarList}>
+                {dataOccup.map((ocupation, key) => ocupation ?
+                    <View style={styles.border} >
+                        <Image
+                            key={key}
+                            resizerMode="cover"
+                            PlaceHolderContent={<ActivityIndicator color="fff"/>}
+                            source={require("../../../assets/img/car.png")}
+                            style={styles.carImage}
+                        />
+                    </View>
+                    :
+                    <View
+                        style={styles.border}
+                    >
+                        <Text
+                            style={styles.occupationText}
+                            key={key}
+                        >
+                            DISPONIBLE
+                        </Text>
+                    </View>
+                )}
+                <Text style={styles.entry}> Entrada </Text>
+            </View>
+        </ScrollView>
     );
 }
 
 const styles = StyleSheet.create({
-    border: {
-        borderTopColor: "#1C6EA4",
-        borderBottomColor: "#1C6EA4",
-        borderTopWidth: 0.5,
-        borderBottomWidth: 0.5,
+    crosswalk: {
+        textAlign: "center",
+        fontWeight: "bold",
     },
-    view: {
-        marginTop: 10,
-    }
+    border: {
+        borderTopColor: "#B7BABE",
+        borderBottomColor: "#B7BABE",
+        borderLeftColor: "#B7BABE",
+        borderTopWidth: 3,
+        borderBottomWidth: 3,
+        borderLeftWidth: 6,
+        marginRight: "50%",
+        width: 160,
+        height: 120,
+    },
+    occupationText: {
+        fontWeight: "bold",
+        color:"#10B82F",
+        textAlign: "center",
+        marginTop: 50,
+        fontSize: 20,
+    },
+    viewCarList: {
+        margin: 10,
+        alignContent: "center",
+    },
+    entry: {
+        position: "absolute",
+        bottom: 5,
+        right: 20,
+        fontWeight: "bold",
+    },
+    carImage:{
+        width: 140,
+        height: 80,
+        position: "absolute",
+        marginTop: 17,
+        marginLeft: 5,
+    },
 })

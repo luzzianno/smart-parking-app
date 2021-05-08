@@ -19,7 +19,7 @@ function CreateAccount(){
     const navigation = useNavigation();
     return(
         <Text style={styles.textRegister} >
-            ¿Aun no tines una cuenta?{" "}
+            ¿Aun no tienes una cuenta?{" "}
             <Text 
                 style={styles.btnRegister}
                 onPress={() => navigation.navigate("register")}
