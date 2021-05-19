@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Icon } from 'react-native-elements'
 import  ParkingsStack from "./ParkingStack"
 import AccountStack from "./AccountStack";
+import Test from "./TestStack";
 
 const Tab = createBottomTabNavigator();
 
@@ -13,8 +14,8 @@ export default function Navigation() {
             <Tab.Navigator
                 initialRouteName="parkings"
                 tabBarOptions={{
-                inactiveTintColor: "#646464",
-                activeTintColor: "#1A6EF8"
+                    inactiveTintColor: "#646464",
+                    activeTintColor: "#1A6EF8"
                 }}
                 screenOptions={({route}) => ({
                     tabBarIcon: ({color}) => screenOptions(route, color),
@@ -29,6 +30,11 @@ export default function Navigation() {
                     name = "account"
                     component = {AccountStack}
                     options = {{ title: "Cuenta" }}
+                />
+                <Tab.Screen
+                    name = "test"
+                    component = {Test}
+                    options = {{title: "Pruebas"}}
                 />
             </Tab.Navigator>  
         </NavigationContainer>

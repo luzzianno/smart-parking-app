@@ -7,13 +7,14 @@ import RegisterForm from "../../components/Account/RegisterForm";
 export default function Register(){
     const toastRef = useRef();
 
-    return(
+    return(<>
         <KeyboardAwareScrollView>
             <View style={styles.viewForm} >  
                 <RegisterForm toastRef={toastRef}/>
-            </View>
-            <Toast ref={toastRef} position="center" opacity={0.9} />
+            </View>  
         </KeyboardAwareScrollView>
+        <Toast ref={toastRef} position='top' positionValue={200} opacity= {1} style = {styles.toastStyle}/>
+        </>
     );
 }
 
@@ -22,4 +23,8 @@ const styles = StyleSheet.create({
         marginLeft: 40,
         marginRight: 40,
     },
+    toastStyle: {
+        marginTop: 100,
+         
+    }
 });
