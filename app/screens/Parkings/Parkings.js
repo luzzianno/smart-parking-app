@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Image, ScrollView, ActivityIndicator } from 're
 import { firebaseApp } from "../../utils/firebase";
 import * as firebase from 'firebase';
 import _ from "lodash";
+import Loading from "../../components/Loading";
 
 const db = firebase.database(firebaseApp).ref("parking1");
 
@@ -38,51 +39,53 @@ export default function Parkings() {
     }, []);
     console.log({dataOccup});
     //console.log(numSlot);
-    return (
-        <ScrollView>
-            <View style={styles.containCrosswalk}>
-                <Image
-                    resizerMode="cover"
-                    PlaceHolderContent={<ActivityIndicator color="fff"/>}
-                    source={require("../../../assets/img/crosswalk.png")}
-                    style={styles.crosswalk}
-                />
-            </View>
-            <View style={styles.viewCarList}>
-                <View style={styles.border2}></View>
-                {dataOccup.map((ocupation, key) => ocupation ?
-                    <View style={styles.border} >
-                        <Image
-                            key={key}
-                            resizerMode="contain"
-                            PlaceHolderContent={<ActivityIndicator color="fff"/>}
-                            source={require("../../../assets/img/car.png")}
-                            style={styles.carImage}
-                        />
-                    </View>
-                    :
-                    <View
-                        style={styles.border}
-                    >
-                        <Text
-                            style={styles.occupationText}
-                            key={key}
+    return ( numSlot ? 
+            <ScrollView>
+                <View style={styles.containCrosswalk}>
+                    <Image
+                        resizerMode="cover"
+                        PlaceHolderContent={<ActivityIndicator color="fff"/>}
+                        source={require("../../../assets/img/crosswalk.png")}
+                        style={styles.crosswalk}
+                    />
+                </View>
+                <View style={styles.viewCarList}>
+                    <View style={styles.border2}></View>
+                    {dataOccup.map((ocupation, key) => ocupation ?
+                        <View style={styles.border} >
+                            <Image
+                                key={key}
+                                resizerMode="contain"
+                                PlaceHolderContent={<ActivityIndicator color="fff"/>}
+                                source={require("../../../assets/img/car.png")}
+                                style={styles.carImage}
+                            />
+                        </View>
+                        :
+                        <View
+                            style={styles.border}
                         >
-                            DISPONIBLE
-                        </Text>
-                    </View>
-                )}
-                <View style={styles.border2}></View>
-                {/* <Text style={styles.textEntry}>Entrada </Text>
-                <Text style={styles.textParking}>Estacionamiento </Text> */}
-                <Image
-                    resizerMode="stretch"
-                    PlaceHolderContent={<ActivityIndicator color="fff"/>}
-                    source={require("../../../assets/img/entry_exit.png")}
-                    style={styles.imageEntryExit}
-                />
-            </View>
-        </ScrollView>
+                            <Text
+                                style={styles.occupationText}
+                                key={key}
+                            >
+                                DISPONIBLE
+                            </Text>
+                        </View>
+                    )}
+                    <View style={styles.border2}></View>
+                    {/* <Text style={styles.textEntry}>Entrada </Text>
+                    <Text style={styles.textParking}>Estacionamiento </Text> */}
+                    <Image
+                        resizerMode="stretch"
+                        PlaceHolderContent={<ActivityIndicator color="fff"/>}
+                        source={require("../../../assets/img/entry_exit.png")}
+                        style={styles.imageEntryExit}
+                    />
+                </View>
+            </ScrollView>
+            :
+            <Loading isVisible={true} text="Cargando..." />
     );
 }
 
