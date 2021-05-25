@@ -1,16 +1,18 @@
 import React from "react";
+import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Icon } from 'react-native-elements'
 import  ParkingsStack from "./ParkingStack"
 import AccountStack from "./AccountStack";
-import Test from "./TestStack";
+import TestView from "./TestStack";
 
 const Tab = createBottomTabNavigator();
 
 export default function Navigation() {
     return (
         <NavigationContainer>
+            <StatusBar backgroundColor='white'/>
             <Tab.Navigator
                 initialRouteName="parkings"
                 tabBarOptions={{
@@ -31,11 +33,11 @@ export default function Navigation() {
                     component = {AccountStack}
                     options = {{ title: "Cuenta" }}
                 />
-                <Tab.Screen
+                {/*<Tab.Screen
                     name = "test"
-                    component = {Test}
+                    component = {TestView}
                     options = {{title: "Pruebas"}}
-                />
+                />*/}
             </Tab.Navigator>  
         </NavigationContainer>
     );
@@ -50,7 +52,7 @@ function screenOptions(route, color){
             break;
         case "account":
             iconName = "account"
-            break;
+            break;  
         default:
             break;
     }

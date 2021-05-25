@@ -12,7 +12,7 @@ const Tab = createMaterialTopTabNavigator();
 const db1 = firebase.database(firebaseApp).ref("parking1");
 const db2 = firebase.database(firebaseApp).ref("parking2");
 
-export default function Parkings(){
+export default function ParkTabs(){
 
     const [dataOccup1, setDataOccup1] = useState([]);
     const [numSlot1, setNumSlot1] = useState(0);

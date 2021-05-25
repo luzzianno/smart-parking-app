@@ -1,17 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, View, Text } from "react-native";
-import { Input, Icon, Button } from "react-native-elements";
-import Toast from 'react-native-easy-toast'
+import { createStackNavigator } from "@react-navigation/stack";
+import ParkTabs from "../screens/TestView/ParkTabs";
+
+const Stack = createStackNavigator();
 
 export default function TestStack () {
 
-    return (
-        <View style={styles.viewStyle}>
-            <Button title={'Press me'} onPress={()=>{
-                this.toast.show('hello world!',2000);
-            }}/>
-            <Toast ref={(toast) => this.toast = toast}/>
-        </View>
+    return(
+        <Stack.Navigator>
+            <Stack.Screen
+                name = "parktabs"
+                component = {ParkTabs}
+                options = {{ title: "Estacionamientos" }}
+            />
+        </Stack.Navigator>
     );
 
 };

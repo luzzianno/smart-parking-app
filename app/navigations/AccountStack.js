@@ -10,7 +10,7 @@ export default function ParkingsStack(){
     return(
         <Stack.Navigator>
             <Stack.Screen
-                name = "parkings"
+                name = "account"
                 component = {Account}
                 options = {{ title: "Cuenta" }}
             />
