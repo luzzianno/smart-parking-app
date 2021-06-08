@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Text, View } from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { firebaseApp } from "../../utils/firebase";
 import * as firebase from 'firebase';
@@ -23,11 +22,9 @@ export default function Parkings(){
     const [emptyPark2, setEmptyPark2] = useState(0);
 
     useEffect(() => {
-        
         db1.on("value", function (snapshot) {
             const aux = [];
             let occurr = 0;
-            //console.log(snapshot.val());
             _.mapKeys(snapshot.val(), function (ocupation, key) {
                 aux.push(ocupation)
             })
@@ -42,11 +39,9 @@ export default function Parkings(){
     }, []);
 
     useEffect(() => {
-        
         db2.on("value", function (snapshot) {
             const aux2 = [];
             let occurr2 = 0;
-            //console.log(snapshot.val());
             _.mapKeys(snapshot.val(), function (ocupation2, key) {
                 aux2.push(ocupation2)
             })
@@ -65,22 +60,23 @@ export default function Parkings(){
             initialRouteName="Estacionamiento 1"
             tabBarOptions={{
                 activeTintColor: '#1A6EF8',
-                inactiveTintColor: '#7E7E7E',
+                inactiveTintColor: '#7E7E7E', 
                 labelStyle: { fontSize: 12 , fontWeight: 'bold'},
-                }}
+            }}
         >
             <Tab.Screen
                 name = {"park1"}
                 component = {() => numSlot1 ? <Park1 data = {{dataOccup1}}/> : <Loading isVisible={true} text="Cargando..." />}
                 options = {{
-                    tabBarLabel: "Estacionamiento 1\n Disponibles: ".concat(emptyPark1),
+                    tabBarLabel: emptyPark1 ? "Estacionamiento 1\n Disponibles: ".concat(emptyPark1) : "Estacionamiento 1\n No disponibles",
+                    
                 }}
             />
             <Tab.Screen
-                name="park2"
+                name={"park2"}
                 component = {() => <Park2 data = {{dataOccup2}}/>}
                 options = {{
-                    tabBarLabel: "Estacionamiento 2\n Disponibles: ".concat(emptyPark2),
+                    tabBarLabel: emptyPark2 ? "Estacionamiento 2\n Disponibles: ".concat(emptyPark2) : "Estacionamiento 2\nNo disponibles",
                 }}
             />
         </Tab.Navigator>

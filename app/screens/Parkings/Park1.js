@@ -3,14 +3,9 @@ import { View, Text, StyleSheet, Image, ScrollView, ActivityIndicator } from 're
 import _ from "lodash";
 
 export default function Park1(props) {
-    console.log(props)
-    scrollToEnd = () => {
-        this.scrollView.scrollToEnd();
-      }
+
     return (
-            <ScrollView
-                ref={(scrollView) => { this.scrollView = scrollView }}
-            >
+            <ScrollView>
                 <View style={styles.containCrosswalk}>
                     <Image
                         resizerMode="cover"
@@ -44,8 +39,6 @@ export default function Park1(props) {
                         </View>
                     )}
                     <View style={styles.border2}></View>
-                    {/* <Text style={styles.textEntry}>Entrada </Text>
-                    <Text style={styles.textParking}>Estacionamiento </Text> */}
                     <Image
                         resizerMode="stretch"
                         PlaceHolderContent={<ActivityIndicator color="fff"/>}
@@ -60,7 +53,7 @@ export default function Park1(props) {
 
 const styles = StyleSheet.create({
     containCrosswalk: {
-        height: 60,
+        height: 40,
         marginTop: 10,
         marginBottom: 4,
         marginLeft: 10,
@@ -79,13 +72,13 @@ const styles = StyleSheet.create({
         borderBottomWidth: 3,
         borderLeftWidth: 6,
         marginRight: "50%",
-        width: 135,
-        height: 80,
+        width: 100,
+        height: 50,
     },
     border2: {
         borderTopColor: "#B7BABE",
         borderTopWidth: 3,
-        width: 135,
+        width: 100,
     },
     occupationText: {
         fontWeight: "bold",
