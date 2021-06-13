@@ -41,7 +41,7 @@ export default function Park2(props) {
                     <Image
                         resizerMode="cover"
                         PlaceHolderContent={<ActivityIndicator color="fff"/>}
-                        source={require("../../../assets/img/crosswalk.png")}
+                        source={require("../../../assets/img/crosswalk.jpg")}
                         style={styles.crosswalk}
                     />
                 </View>
@@ -52,11 +52,11 @@ export default function Park2(props) {
 
 const styles = StyleSheet.create({
     containCrosswalk: {
-        height: 40,
+        height: 50,
         marginTop: 10,
         marginBottom: 4,
-        marginLeft: 10,
-        marginRight: 10,
+        marginLeft: 30,
+        marginRight: 30,
     },
     crosswalk: {
         flex: 1,
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         color:"#10B82F",
         textAlign: "center",
-        marginTop: "20%",
+        marginTop: "12%",
         flex: 1,
         fontSize: 15,
     },

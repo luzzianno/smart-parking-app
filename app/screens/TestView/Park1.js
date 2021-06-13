@@ -10,7 +10,7 @@ export default function Park1(props) {
                     <Image
                         resizerMode="cover"
                         PlaceHolderContent={<ActivityIndicator color="fff"/>}
-                        source={require("../../../assets/img/crosswalk.png")}
+                        source={require("../../../assets/img/crosswalk.jpg")}
                         style={styles.crosswalk}
                     />
                 </View>

@@ -8,28 +8,37 @@ export default function UserGest(){
 
     return(
         <ScrollView centerContent={true} style={styles.viewBody}>
+            <Image
+                source={require("../../../assets/img/icono_app.png")}
+                resizeMode="contain"
+                style={styles.image}
+            />
             <Text style={styles.title} > Smart Parking UACh </Text>
             <Text style={styles.description} >
                 Esta es una aplicacion en estado de pruebas
                 que te permitira visualizar las plazas disponibles en hasta
-                ahora, tres estacionamientos del campus miraflores.
+                ahora, dos estacionamientos del campus miraflores.
             </Text>
-            <View style={styles.viewBtn}>
-                <Button
-                    title="Ver tu perfil"
-                    buttonStyle={styles.btnStyle}
-                    containerStyle={styles.btnContainer}
-                    onPress={() => navigation.navigate("login")}
-                />
-            </View>
+            <Button
+                title="Ver tu perfil"
+                buttonStyle={styles.btnStyle}
+                containerStyle={styles.btnContainer}
+                onPress={() => navigation.navigate("login")}
+            />
         </ScrollView>
     );
 }
 
 const styles = StyleSheet.create({
     viewBody: {
+        marginTop: 30,
         marginLeft: 30,
         marginRight: 30,
+    },
+    image: {
+        height: 150,
+        width: "100%",
+        marginBottom: 10,
     },
     title: {
         fontWeight: "bold",
@@ -49,6 +58,6 @@ const styles = StyleSheet.create({
         backgroundColor:"#1A6EF8",
     },
     btnContainer: {
-        width: "70%",
+        width: "95%",
     },
 });
